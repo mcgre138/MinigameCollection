@@ -21,8 +21,21 @@
         <member name="T:Rewired.Utils.Attributes.BitmaskAttribute">
             <exclude></exclude>
         </member>
+        <member name="T:Rewired.Utils.Attributes.BitmaskToggleAttribute">
+            <exclude></exclude>
+        </member>
         <member name="T:Rewired.Utils.Attributes.FieldRangeAttribute">
             <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Utils.Attributes.PreserveAttribute">
+            <summary>
+            Use to preserve things from IL2CPP stripping.
+            Usage:
+            - Assembly: preserves all types in the assembly (as if a preserve attribute were on each type)
+            - Type: preserves the type and its default constructor
+            - Method: preserves the methods declaring type, return type, and a the types of all of its arguments
+            - Property, Field, Event: preserves the declaring type and return type
+            </summary>
         </member>
         <member name="T:Rewired.PlayerIdPropertyAttribute">
             <summary>
@@ -150,6 +163,30 @@
             Gets the length of time in seconds that an axis has been inactive as calculated from the raw value. Returns 0 if the axis is currently active.
             </summary>
             <returns>The duration the axis has been continuously inactive.</returns>
+        </member>
+        <member name="M:Rewired.InputActionEventData.GetAxisCoordinateMode">
+            Gets the current coordinate mode of the axis.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            <returns>The axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.InputActionEventData.GetAxisCoordinateModePrev">
+            Gets the coordinate mode of the axis on the previous frame.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            <returns>The axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.InputActionEventData.GetAxisRawCoordinateMode">
+            Gets the current coordinate mode of the raw axis.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            <returns>The raw axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.InputActionEventData.GetAxisRawCoordinateModePrev">
+            Gets the coordinate mode of the raw axis on the previous frame.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            <returns>The raw axis coordinate mode.</returns>
         </member>
         <member name="M:Rewired.InputActionEventData.GetButton">
             <summary>
@@ -654,6 +691,21 @@
         <member name="P:Rewired.ControllerPollingInfo.keyboardKey">
             <summary>
             The keyboard key that returned input. This is only valid if controllerType is Keyboard.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerPollingInfo.player">
+            <summary>
+            The Player that generated this input. This value is only valid if the controller is assigned to a Player and polling was called on or through Player.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerPollingInfo.controller">
+            <summary>
+            The controller that returned input.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerPollingInfo.elementIdentifier">
+            <summary>
+            The controller element identifier that returned input.
             </summary>
         </member>
         <member name="T:Rewired.ElementAssignmentConflictInfo">
@@ -1511,36 +1563,6 @@
             The display name of the element in this assignment.
             </summary>
         </member>
-        <member name="P:Rewired.ButtonStateRecorder.lastTimeStateChangedToPressed">
-            <summary>
-            Returns the last time the button state became pressed exactly.
-            Does not return 0 when the button is currently pressed like above.
-            </summary>
-        </member>
-        <member name="P:Rewired.ButtonStateRecorder.lastTimeStateChangedToUnpressed">
-            <summary>
-            Returns the the last time the button state became unpressed exactly.
-            Does not return 0 when the button is currently unpressed like above.
-            </summary>
-        </member>
-        <member name="F:Rewired.PlatformInputManager._DeviceConnectedEvent">
-            Events
-        </member>
-        <member name="M:Rewired.Interfaces.IInputSource.SystemDeviceConnected">
-            <summary>
-            Only for input sources that get their device connections from without
-            </summary>
-        </member>
-        <member name="M:Rewired.Interfaces.IInputSource.SystemDeviceDisconnected">
-            <summary>
-            Only for input sources that get their device connections from without
-            </summary>
-        </member>
-        <member name="E:Rewired.Interfaces.IInputSource.DeviceChangedEvent">
-            <summary>
-            Only for input sources that get their device connections from within
-            </summary>
-        </member>
         <member name="T:Rewired.InputActionSourceData">
             <summary>
             Provides information about the current sources contributing to the value of an Input Action.
@@ -1569,6 +1591,36 @@
         <member name="P:Rewired.InputActionSourceData.elementIdentifierName">
             <summary>
             Gets the element identifier name of the element that contributed to the value of the Action.
+            </summary>
+        </member>
+        <member name="P:Rewired.ButtonStateRecorder.lastTimeStateChangedToPressed">
+            <summary>
+            Returns the last time the button state became pressed exactly.
+            Does not return 0 when the button is currently pressed like above.
+            </summary>
+        </member>
+        <member name="P:Rewired.ButtonStateRecorder.lastTimeStateChangedToUnpressed">
+            <summary>
+            Returns the the last time the button state became unpressed exactly.
+            Does not return 0 when the button is currently unpressed like above.
+            </summary>
+        </member>
+        <member name="F:Rewired.PlatformInputManager._DeviceConnectedEvent">
+            Events
+        </member>
+        <member name="M:Rewired.Interfaces.IInputSource.SystemDeviceConnected">
+            <summary>
+            Only for input sources that get their device connections from without
+            </summary>
+        </member>
+        <member name="M:Rewired.Interfaces.IInputSource.SystemDeviceDisconnected">
+            <summary>
+            Only for input sources that get their device connections from without
+            </summary>
+        </member>
+        <member name="E:Rewired.Interfaces.IInputSource.DeviceChangedEvent">
+            <summary>
+            Only for input sources that get their device connections from within
             </summary>
         </member>
         <member name="P:Rewired.TouchInfo.isValid">
@@ -1608,6 +1660,9 @@
             <summary>
             The base class for component controllers.
             </summary>
+        </member>
+        <member name="T:Rewired.Utils.Interfaces.IRegistrar`1">
+            <exclude></exclude>
         </member>
         <member name="P:Rewired.ComponentControls.ComponentController.initialized">
             <summary>
@@ -2211,6 +2266,11 @@
         <member name="P:Rewired.ComponentControls.TouchJoystick.scaleStickRange">
             <summary>
             If enabled, the stick range will scale with parent controls. Otherwise, the stick range will remain constant.
+            </summary>
+        </member>
+        <member name="P:Rewired.ComponentControls.TouchJoystick.stickBounds">
+            <summary>
+            The shape of the range of movement of the joystick.
             </summary>
         </member>
         <member name="P:Rewired.ComponentControls.TouchJoystick.axesToUse">
@@ -3326,6 +3386,11 @@
             NOTE: If comparing time against current time, always compare to ReInput.time.unscaledTime.
             </summary>
         </member>
+        <member name="P:Rewired.Controller.Button.state">
+            <summary>
+            Gets the button state flags.
+            </summary>
+        </member>
         <member name="T:Rewired.Controller.CompoundElement">
             <summary>
             Base class for compound elements. Compound elements are a combination of existing elements such as 2 axes making up an Axis 2D.
@@ -4046,7 +4111,7 @@
             Drift can occur on the world Y axis over time. The orientation can be reset by calling ResetOrientation().
             Note: Orientation is not very reliable when connected via Bluetooth due to the possibility of dropped gyro data.
             </summary>
-            <returns></returns>
+            <returns>Orientation</returns>
         </member>
         <member name="M:Rewired.ControllerExtensions.DualShock4Extension.ResetOrientation">
             <summary>
@@ -4188,7 +4253,7 @@
         </member>
         <member name="T:Rewired.ControllerExtensions.SteamControllerExtension">
             <summary>
-            Allows access to controller-specific functions.
+            Allows access to Steam Controller-specific functions.
             </summary>
         </member>
         <member name="M:Rewired.ControllerExtensions.SteamControllerExtension.GetActionSetHandle(System.String)">
@@ -4338,49 +4403,17 @@
             <param name="actionHandle">Action handle</param>
             <returns>List of action origins</returns>
         </member>
-        <member name="M:Rewired.ControllerExtensions.SteamControllerExtension.GetDigitalActionOriginGlyphs(System.UInt64,System.UInt64)">
-            <summary>
-            Get a list of glyphs for a Steam digital action.
-            </summary>
-            <param name="actionSetHandle">Action set handle</param>
-            <param name="actionHandle">Action handle</param>
-            <returns>List of glyphs</returns>
-        </member>
-        <member name="M:Rewired.ControllerExtensions.SteamControllerExtension.GetDigitalActionOriginGlyphs(System.String,System.String)">
-            <summary>
-            Get a list of glyphs for a Steam digital action.
-            </summary>
-            <param name="actionSetName">Action set name</param>
-            <param name="actionName">Action name</param>
-            <returns>List of glyphs</returns>
-        </member>
-        <member name="M:Rewired.ControllerExtensions.SteamControllerExtension.GetAnalogActionOriginGlyphs(System.UInt64,System.UInt64)">
-            <summary>
-            Get a list of glyphs for a Steam analog action.
-            </summary>
-            <param name="actionSetHandle">Action set handle</param>
-            <param name="actionHandle">Action handle</param>
-            <returns>List of glyphs</returns>
-        </member>
-        <member name="M:Rewired.ControllerExtensions.SteamControllerExtension.GetAnalogActionOriginGlyphs(System.String,System.String)">
-            <summary>
-            Get a list of glyphs for a Steam digital action.
-            </summary>
-            <param name="actionSetName">Action set name</param>
-            <param name="actionName">Action name</param>
-            <returns>List of glyphs</returns>
-        </member>
-        <member name="M:Rewired.ControllerExtensions.SteamControllerExtension.GetActionOriginGlyph(Rewired.ControllerExtensions.SteamControllerActionOrigin)">
-            <summary>
-            Get a glyph for a particular Steam action origin.
-            </summary>
-            <param name="actionOrigin">Origin of the action</param>
-            <returns>Glyph</returns>
-        </member>
         <member name="T:Rewired.Joystick">
             <summary>
             A joystick with buttons and axes.
             </summary>
+        </member>
+        <member name="M:Rewired.Joystick.IsType(Rewired.JoystickType)">
+            <summary>
+            Checks whether this Joystick matches a specific type.
+            </summary>
+            <param name="joystickType">The Joystick type to match.</param>
+            <returns>True if the type matches, false if it does not.</returns>
         </member>
         <member name="M:Rewired.Joystick.GetCalibrationMapSaveData">
             <summary>
@@ -4448,6 +4481,11 @@
             Stops vibration on all motors.
             </summary>
         </member>
+        <member name="P:Rewired.Joystick.joystickTypes">
+            <summary>
+            The joystick types that apply to this Joystick. A Joystick may have more than one Joystick Type.
+            </summary>
+        </member>
         <member name="P:Rewired.Joystick.systemId">
             <summary>
             The id of the device in the underlying input source. The meaning of this value is determined by the current input source.
@@ -4467,6 +4505,17 @@
         <member name="P:Rewired.Joystick.hardwareTypeGuid">
             <summary>
             The Rewired GUID associated with this device. A GUID of all zeros is an Unknown Controller.
+            </summary>
+        </member>
+        <member name="P:Rewired.Joystick.deviceInstanceGuid">
+            <summary>
+            The unique persistent instance GUID of this device.
+            This is an id generated for the device that may stay constant between application sessions and system restarts.
+            This can be used for device assignment persistence between runs. The specific platform and input sources in use
+            affects the reliability of this value for device assignment persistence.
+            A value of Guid.Empty means the device or input source has no reliable unique identifier so persistant assignment
+            isn't possible using this value. Even if a Guid is provided, reliability when multiple identical controllers are
+            attached depends greatly on the platform and input source(s) currently in use.
             </summary>
         </member>
         <member name="P:Rewired.Joystick.supportsVibration">
@@ -4577,6 +4626,66 @@
             Configuration variables for the Input Manager.
             </summary>
             <exclude></exclude>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.GetPlatformVar_disableKeyboard">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.GetPlatformVar_ignoreInputWhenAppNotInFocus">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.GetPlatformVar_useEnhancedDeviceSupport">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.GetPlatformVar_useNativeMouse">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.GetPlatformVar_useNativeKeyboard">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.GetPlatformVar_joystickRefreshRate">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.SetPlatformVar_ignoreInputWhenAppNotInFocus(System.Boolean)">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.SetPlatformVar_useEnhancedDeviceSupport(System.Boolean)">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.SetPlatformVar_useNativeMouse(System.Boolean)">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.SetPlatformVar_useNativeKeyboard(System.Boolean)">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.SetPlatformVar_joystickRefreshRate(System.Int32)">
+            <summary>
+            Runtime only!
+            </summary>
+        </member>
+        <member name="M:Rewired.Data.ConfigVars.GetPlatformVars">
+            <summary>
+            Runtime only!
+            </summary>
         </member>
         <member name="T:Rewired.Data.ConfigVars.PlatformVars">
             <summary>
@@ -4847,6 +4956,9 @@
         <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_Custom.Elements">
             <exclude></exclude>
         </member>
+        <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_Custom.CustomCalculationSourceData">
+            <exclude></exclude>
+        </member>
         <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_Custom.Element">
             <exclude></exclude>
         </member>
@@ -4979,6 +5091,24 @@
         <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_Steam">
             <exclude></exclude>
         </member>
+        <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_WebGL_Base">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_WebGL_Base.MatchingCriteria">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_WebGL_Base.Elements">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_WebGL_Base.Button">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_WebGL_Base.Axis">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Data.Mapping.HardwareJoystickMap.Platform_WebGL">
+            <exclude></exclude>
+        </member>
         <member name="T:Rewired.Data.Mapping.HardwareJoystickTemplateMap">
             <summary>
             Maps hardware joystick maps to a common template.
@@ -5016,9 +5146,6 @@
             <exclude></exclude>
         </member>
         <member name="T:Rewired.Data.Mapping.HardwareAxisType">
-            <exclude></exclude>
-        </member>
-        <member name="T:Rewired.Data.Mapping.AxisDataFormat">
             <exclude></exclude>
         </member>
         <member name="T:Rewired.Data.Mapping.AxisCalibrationType">
@@ -5290,9 +5417,34 @@
             The type of axis.
             </summary>
         </member>
+        <member name="F:Rewired.AxisType.None">
+            <summary>
+            Not an axis.
+            </summary>
+        </member>
+        <member name="F:Rewired.AxisType.Normal">
+            <summary>
+            A full axis with both positive and negative sides.
+            </summary>
+        </member>
+        <member name="F:Rewired.AxisType.Split">
+            <summary>
+            One half of an axis with only a positive or negative side.
+            </summary>
+        </member>
         <member name="T:Rewired.Pole">
             <summary>
             A positive or negative value.
+            </summary>
+        </member>
+        <member name="F:Rewired.Pole.Positive">
+            <summary>
+            Positive value.
+            </summary>
+        </member>
+        <member name="F:Rewired.Pole.Negative">
+            <summary>
+            Negative value.
             </summary>
         </member>
         <member name="T:Rewired.AxisRange">
@@ -5300,9 +5452,59 @@
             The range of an axis.
             </summary>
         </member>
+        <member name="F:Rewired.AxisRange.Full">
+            <summary>
+            A complete axis with both positive and negative sides.
+            </summary>
+        </member>
+        <member name="F:Rewired.AxisRange.Positive">
+            <summary>
+            Only the positive side of the axis.
+            </summary>
+        </member>
+        <member name="F:Rewired.AxisRange.Negative">
+            <summary>
+            Only the negative side of the axis.
+            </summary>
+        </member>
+        <member name="T:Rewired.AxisCoordinateMode">
+            <summary>
+            The axis coordinate mode.
+            </summary>
+        </member>
+        <member name="F:Rewired.AxisCoordinateMode.Absolute">
+            <summary>
+            Represents the position of the axis in relation to a fixed point.
+            </summary>
+        </member>
+        <member name="F:Rewired.AxisCoordinateMode.Relative">
+            <summary>
+            Represents the change in position of the axis since the last time the value was retreived.
+            </summary>
+        </member>
         <member name="T:Rewired.ControllerType">
             <summary>
             The type of a controller.
+            </summary>
+        </member>
+        <member name="F:Rewired.ControllerType.Keyboard">
+            <summary>
+            A keyboard.
+            </summary>
+        </member>
+        <member name="F:Rewired.ControllerType.Mouse">
+            <summary>
+            A mouse.
+            </summary>
+        </member>
+        <member name="F:Rewired.ControllerType.Joystick">
+            <summary>
+            A joystick.
+            </summary>
+        </member>
+        <member name="F:Rewired.ControllerType.Custom">
+            <summary>
+            A Custom Controller.
             </summary>
         </member>
         <member name="T:Rewired.ControllerElementType">
@@ -5572,7 +5774,18 @@
             Axis sensitivity calculation type.
             </summary>
         </member>
+        <member name="T:Rewired.JoystickType">
+            <summary>
+            Joystick type.
+            </summary>
+        </member>
         <member name="T:Rewired.Utils.Interfaces.IExternalTools">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Utils.Interfaces.IExternalInputManager">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Utils.Interfaces.IKeyedData`1">
             <exclude></exclude>
         </member>
         <member name="M:Rewired.HID.Drivers.DualShock4Driver.GetTwist(UnityEngine.Quaternion,UnityEngine.Vector3)">
@@ -5792,6 +6005,34 @@
         <member name="E:Rewired.Internal.StandaloneAxis2D.RawValueChangedEvent">
             <summary>
             Event fired when the raw value changes.
+            </summary>
+        </member>
+        <member name="T:Rewired.VirtualButton">
+            <summary>
+            A virtual button that is used to track button states for things like
+            keyboard + modifier keys and mouse axes being treated as digital buttons.
+            This is auto-cleared every update by Control Manager.
+            You cannot set the button value to false, only true.
+            It can be set multiple times per frame as well without issue.
+            </summary>
+        </member>
+        <member name="M:Rewired.VirtualButton.SetOn(Rewired.UpdateLoopType,System.Boolean)">
+            <summary>
+            This does not store the valuePrev at this time so it can be set multiple times per update.
+            You cannot set a negative value here because the button may be fed by multiple sources and
+            negatives cannot cancel out positives. The button value will be cleared at the end up update.
+            </summary>
+        </member>
+        <member name="M:Rewired.VirtualButton.InnerButton.SetOn(System.Boolean)">
+            <summary>
+            This does not store the valuePrev at this time so it can be set multiple times per update.
+            You cannot set a negative value here because the button may be fed by multiple sources and
+            negatives cannot cancel out positives. The button value will be cleared at the end up update.
+            </summary>
+        </member>
+        <member name="T:Rewired.VirtualButton.InnerButton.ButtonValueFlags">
+            <summary>
+            Represents the value and previous 
             </summary>
         </member>
         <member name="T:Rewired.ActionElementMap">
@@ -7546,6 +7787,21 @@
             DO NOT USE ControllerMap or ControllerMapWithAxes!
             </summary>
         </member>
+        <member name="M:Rewired.HardwareControllerMap_Game.#ctor(System.String,System.Int32,Rewired.ControllerElementIdentifier[],System.Int32[],System.Int32[],Rewired.AxisCalibrationData[],Rewired.AxisRange[],Rewired.Data.Mapping.HardwareAxisInfo[],Rewired.Data.Mapping.HardwareButtonInfo[],Rewired.Data.Mapping.HardwareJoystickMap.CompoundElement[])">
+            <summary>
+            Overload for Custom Controllers.
+            </summary>
+        </member>
+        <member name="M:Rewired.HardwareControllerMap_Game.#ctor(System.String,Rewired.HardwareControllerMapIdentifier,Rewired.JoystickType[],Rewired.ControllerElementIdentifier[],System.Int32[],System.Int32[],Rewired.AxisCalibrationData[],Rewired.AxisRange[],Rewired.Data.Mapping.HardwareAxisInfo[],Rewired.Data.Mapping.HardwareButtonInfo[],Rewired.Data.Mapping.HardwareJoystickMap.CompoundElement[])">
+            <summary>
+            Overload for Joysticks.
+            </summary>
+        </member>
+        <member name="M:Rewired.HardwareControllerMap_Game.#ctor(System.String,Rewired.HardwareControllerMapIdentifier,Rewired.ControllerElementIdentifier[],System.Int32[],System.Int32[],Rewired.AxisCalibrationData[],Rewired.AxisRange[],Rewired.Data.Mapping.HardwareAxisInfo[],Rewired.Data.Mapping.HardwareButtonInfo[],Rewired.Data.Mapping.HardwareJoystickMap.CompoundElement[])">
+            <summary>
+            Overload for keyboard/mouse.
+            </summary>
+        </member>
         <member name="T:Rewired.InputAction">
             <summary>
             Represents a single action.
@@ -8132,21 +8388,25 @@
             </summary>
         </member>
         <member name="T:Rewired.Platforms.Platform">
+            <exclude></exclude>
             <summary>
             The runtime platform.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.EditorPlatform">
+            <exclude></exclude>
             <summary>
             The editor platform.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.WebplayerPlatform">
+            <exclude></exclude>
             <summary>
             The webplayer platform.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.WindowsStandalonePrimaryInputSource">
+            <exclude></exclude>
             <summary>
             Windows Standalone input sources.
             </summary>
@@ -8177,6 +8437,7 @@
             </summary>
         </member>
         <member name="T:Rewired.Platforms.OSXStandalonePrimaryInputSource">
+            <exclude></exclude>
             <summary>
             OSX Standalone input sources.
             </summary>
@@ -8197,6 +8458,7 @@
             </summary>
         </member>
         <member name="T:Rewired.Platforms.LinuxStandalonePrimaryInputSource">
+            <exclude></exclude>
             <summary>
             Linux Standalone input sources.
             </summary>
@@ -8217,21 +8479,31 @@
             </summary>
         </member>
         <member name="T:Rewired.Platforms.WindowsUWPPrimaryInputSource">
+            <exclude></exclude>
             <summary>
             Windows 10 Universal input sources.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.XboxOnePrimaryInputSource">
+            <exclude></exclude>
             <summary>
             Xbox One input sources.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.PS4PrimaryInputSource">
+            <exclude></exclude>
             <summary>
             PS4 input sources.
             </summary>
         </member>
+        <member name="T:Rewired.Platforms.WebGLPrimaryInputSource">
+            <exclude></exclude>
+            <summary>
+            WebGL input sources.
+            </summary>
+        </member>
         <member name="T:Rewired.Platforms.DirectInputAxis">
+            <exclude></exclude>
             <summary>
             Axes supported by DirectInput.
             </summary>
@@ -8242,28 +8514,51 @@
             </summary>
         </member>
         <member name="T:Rewired.Platforms.XInputAxis">
+            <exclude></exclude>
             <summary>
             Axes supported by XInput.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.XInputButton">
+            <exclude></exclude>
             <summary>
             Buttons supported by XInput.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.OSXAxis">
+            <exclude></exclude>
             <summary>
             Axes supported by OSX.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.UnityAxis">
+            <exclude></exclude>
             <summary>
             Axes supported by Unity input.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.UnityButton">
+            <exclude></exclude>
             <summary>
             Buttons supported by Unity input.
+            </summary>
+        </member>
+        <member name="T:Rewired.Platforms.WebGLGamepadMappingType">
+            <exclude></exclude>
+            <summary>
+            WebGL gamepad mapping types.
+            </summary>
+        </member>
+        <member name="T:Rewired.Platforms.WebGLWebBrowserType">
+            <exclude></exclude>
+            <summary>
+            WebGL Browser types.
+            </summary>
+        </member>
+        <member name="T:Rewired.Platforms.WebGLOSType">
+            <exclude></exclude>
+            <summary>
+            WebGL Browser types.
             </summary>
         </member>
         <member name="T:Rewired.Player">
@@ -9441,6 +9736,78 @@
             <param name="actionId">Id of the Action</param>
             <returns>The duration the axis has been continuously inactive.</returns>
         </member>
+        <member name="M:Rewired.Player.GetAxisCoordinateMode(System.String)">
+            <summary>
+            Gets the current coordinate mode of the axis.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            </summary>
+            <param name="actionName">Name of the Action</param>
+            <returns>The axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.Player.GetAxisCoordinateMode(System.Int32)">
+            <summary>
+            Gets the current coordinate mode of the axis.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            </summary>
+            <param name="actionId">Id of the Action</param>
+            <returns>The axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.Player.GetAxisRawCoordinateMode(System.String)">
+            <summary>
+            Gets the current coordinate mode of the raw axis.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            </summary>
+            <param name="actionName">Name of the Action</param>
+            <returns>The raw axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.Player.GetAxisRawCoordinateMode(System.Int32)">
+            <summary>
+            Gets the current coordinate mode of the raw axis.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            </summary>
+            <param name="actionId">Id of the Action</param>
+            <returns>The raw axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.Player.GetAxisCoordinateModePrev(System.String)">
+            <summary>
+            Gets the coordinate mode of the axis on the previous frame.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            </summary>
+            <param name="actionName">Name of the Action</param>
+            <returns>The axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.Player.GetAxisCoordinateModePrev(System.Int32)">
+            <summary>
+            Gets the coordinate mode of the axis on the previous frame.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            </summary>
+            <param name="actionId">Id of the Action</param>
+            <returns>The axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.Player.GetAxisRawCoordinateModePrev(System.String)">
+            <summary>
+            Gets the coordinate mode of the raw axis on the previous frame.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            </summary>
+            <param name="actionName">Name of the Action</param>
+            <returns>The raw axis coordinate mode.</returns>
+        </member>
+        <member name="M:Rewired.Player.GetAxisRawCoordinateModePrev(System.Int32)">
+            <summary>
+            Gets the coordinate mode of the raw axis on the previous frame.
+            This can be used to detect whether the axis is returning a delta value
+            (mouse, touchpad, etc.) or an absolute value (joystick).
+            </summary>
+            <param name="actionId">Id of the Action</param>
+            <returns>The raw axis coordinate mode.</returns>
+        </member>
         <member name="M:Rewired.Player.GetCurrentInputSources(System.String)">
             <summary>
             Gets a list of all the input sources that contributed to the value of an Action in the current frame.
@@ -9680,6 +10047,51 @@
             Clears all input action event delegates. You will no longer receive any input action update events.
             </summary>
         </member>
+        <member name="M:Rewired.Player.SetVibration(System.Int32,System.Single)">
+            <summary>
+            Sets vibration level for a motor at a specified index in all <see cref="T:Rewired.Joystick">Joysticks</see> assigned to the Player.
+            </summary>
+            <param name="motorIndex">Motor index</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+        </member>
+        <member name="M:Rewired.Player.SetVibration(System.Int32,System.Single,System.Single)">
+            <summary>
+            Sets vibration level for a motor at a specified index with a timeout in all <see cref="T:Rewired.Joystick">Joysticks</see> assigned to the Player..
+            </summary>
+            <param name="motorIndex">Motor index</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+            <param name="duration">Length of time in seconds to activate the motor before it stops. [0 = Infinite]</param>
+        </member>
+        <member name="M:Rewired.Player.SetVibration(System.Int32,System.Single,System.Boolean)">
+            <summary>
+            Sets vibration level for a motor at a specified index in all <see cref="T:Rewired.Joystick">Joysticks</see> assigned to the Player..
+            </summary>
+            <param name="motorIndex">Motor index</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+            <param name="stopOtherMotors">Stop other motors?</param>
+        </member>
+        <member name="M:Rewired.Player.SetVibration(System.Int32,System.Single,System.Single,System.Boolean)">
+            <summary>
+            Sets vibration level for a motor at a specified index with a timeout in all <see cref="T:Rewired.Joystick">Joysticks</see> assigned to the Player..
+            </summary>
+            <param name="motorIndex">Motor index</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+            <param name="duration">Length of time in seconds to activate the motor before it stops. [0 = Infinite]</param>
+            <param name="stopOtherMotors">Stop other motors?</param>
+        </member>
+        <member name="M:Rewired.Player.GetVibration(System.Int32)">
+            <summary>
+            Gets vibration level for a motor at a specified index.
+            This returns the largest value found for the specified motor index in all <see cref="T:Rewired.Joystick">Joysticks</see> assigned to the Player.
+            </summary>
+            <param name="motorIndex">Motor index</param>
+            <returns>Motor level [float: 0.0 - 1.0]</returns>
+        </member>
+        <member name="M:Rewired.Player.StopVibration">
+            <summary>
+            Stops vibration on all motors.
+            </summary>
+        </member>
         <member name="P:Rewired.Player.id">
             <summary>
             The id of the Player.
@@ -9866,6 +10278,39 @@
             <summary>
             Provides access to all controller element assignment conflict checking related members.
             </summary>
+        </member>
+        <member name="T:Rewired.Utils.Classes.CodeHelper">
+            <exclude></exclude>
+        </member>
+        <member name="M:Rewired.Utils.Classes.CodeHelper.Equals(System.Object)">
+            <exclude></exclude>
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+            </summary>
+            <returns>
+            true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+            </returns>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>. </param><filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Rewired.Utils.Classes.CodeHelper.GetHashCode">
+            <exclude></exclude>
+            <summary>
+            Serves as a hash function for a particular type. 
+            </summary>
+            <returns>
+            A hash code for the current <see cref="T:System.Object"/>.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Rewired.Utils.Classes.CodeHelper.ToString">
+            <exclude></exclude>
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
+            <filterpriority>2</filterpriority>
         </member>
         <member name="M:Rewired.Player.ControllerHelper.ConflictCheckingHelper.DoesElementAssignmentConflict(Rewired.ControllerType,System.Int32,Rewired.ControllerMap)">
             <summary>
@@ -11298,6 +11743,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetAllMapsEnabled(System.Boolean)">
             <summary>
             Set the enabled state in all controller maps.
+            NOTE: This method is not a persistent flag in Player that will set controller maps
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <returns>Number of maps that changed state.</returns>
@@ -11305,6 +11757,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetAllMapsEnabled(System.Boolean,Rewired.ControllerType)">
             <summary>
             Set the enabled state in all controller maps for a particular controller type.
+            NOTE: This method is not a persistent flag in Player that will set controller maps
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controllerType">The controller type.</param>
@@ -11313,6 +11772,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetAllMapsEnabled(System.Boolean,Rewired.Controller)">
             <summary>
             Set the enabled state in all controller maps for a particular controller.
+            NOTE: This method is not a persistent flag in Player that will set controller maps
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controller">The Controller.</param>
@@ -11321,6 +11787,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetAllMapsEnabled(System.Boolean,Rewired.ControllerType,System.Int32)">
             <summary>
             Set the enabled state in all controller maps for a particular controller.
+            NNOTE: This method is not a persistent flag in Player that will set controller maps
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controllerType">The controller type.</param>
@@ -11330,6 +11803,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,System.Int32)">
             <summary>
             Set the enabled state in all controller maps in a particular category.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="categoryId">The id of the category.</param>
@@ -11338,6 +11818,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,System.String)">
             <summary>
             Set the enabled state in all controller maps in a particular category.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="categoryName">The name of the category.</param>
@@ -11346,6 +11833,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,System.String,System.String)">
             <summary>
             Set the enabled state in all controller maps in a particular category and layout.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="categoryName">The name of the category.</param>
@@ -11355,6 +11849,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,Rewired.ControllerType,System.Int32)">
             <summary>
             Set the enabled state in all controller maps in a category for a particular controller type.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controllerType">The controller type.</param>
@@ -11364,6 +11865,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,Rewired.ControllerType,System.String)">
             <summary>
             Set the enabled state in all controller maps in a category for a particular controller type.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controllerType">The controller type.</param>
@@ -11373,6 +11881,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,Rewired.ControllerType,System.Int32,System.Int32)">
             <summary>
             Set the enabled state in all controller maps in a category and layout for a particular controller type.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controllerType">The controller type.</param>
@@ -11383,6 +11898,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,Rewired.ControllerType,System.String,System.String)">
             <summary>
             Set the enabled state in all controller maps in a category and layout for a particular controller type.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controllerType">The controller type.</param>
@@ -11393,6 +11915,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,Rewired.Controller,System.Int32)">
             <summary>
             Set the enabled state in all controller maps in a category and layout for a particular controller.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controller">The Controller.</param>
@@ -11402,6 +11931,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,Rewired.Controller,System.Int32,System.Int32)">
             <summary>
             Set the enabled state in all controller maps in a category and layout for a particular controller.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controller">The Controller.</param>
@@ -11412,6 +11948,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,Rewired.Controller,System.String)">
             <summary>
             Set the enabled state in all controller maps in a category and layout for a particular controller.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controller">The Controller.</param>
@@ -11421,6 +11964,13 @@
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.SetMapsEnabled(System.Boolean,Rewired.Controller,System.String,System.String)">
             <summary>
             Set the enabled state in all controller maps in a category and layout for a particular controller.
+            NOTE: This method is not a persistent flag in Player that will set a certain category of map
+            enabled/disabled upon loading. It is simply a shortcut for the iterating the controller maps
+            currently loaded in the Player and set them enabled/disabled at the time the method is called.
+            When new Controller Maps are loaded in the Player, either manually or when a Joystick is assigned,
+            the newly loaded maps will be enabled/disabled based on the default enabled state settings for
+            these maps on the Player page in the Rewired Input Manager, not based on previous calls to
+            SetMapsEnabled. Read the documentation on Controller Maps for more information.
             </summary>
             <param name="state">The enabled state.</param>
             <param name="controller">The Controller.</param>
@@ -11942,7 +12492,7 @@
         </member>
         <member name="P:Rewired.ReInput.ConfigHelper.useXInput">
             <summary>
-            Toggles the use of XInput in Windows Standalone during runtime. Rewired will be completely reset if this value is changed.
+            Toggles the use of XInput in Windows Standalone and Windows UWP during runtime. Rewired will be completely reset if this value is changed.
             </summary>
         </member>
         <member name="P:Rewired.ReInput.ConfigHelper.windowsStandalonePrimaryInputSource">
@@ -11965,6 +12515,14 @@
             Changes the primary input source in Windows 10 Universal during runtime. Rewired will be completely reset if this value is changed.
             </summary>
         </member>
+        <member name="P:Rewired.ReInput.ConfigHelper.windowsUWPSupportHIDDevices">
+            <summary>
+            Toggles support for HID devices in Windows UWP. This includes older gamepads, gamepads made for Android, flight controllers, racing wheels,
+            etc. In order to use this feature, you must add support for HID gamepads and joysticks to the app manifest file.
+            Please see the Special Platform Support -> Windows 10 Universal documentation for details.
+            Rewired will be completely reset if this value is changed.
+            </summary>
+        </member>
         <member name="P:Rewired.ReInput.ConfigHelper.xboxOnePrimaryInputSource">
             <summary>
             Changes the primary input source in Xbox One during runtime. Rewired will be completely reset if this value is changed.
@@ -11975,16 +12533,20 @@
             Changes the primary input source in PS4 during runtime. Rewired will be completely reset if this value is changed.
             </summary>
         </member>
+        <member name="P:Rewired.ReInput.ConfigHelper.webGLPrimaryInputSource">
+            <summary>
+            Changes the primary input source in WebGL during runtime. Rewired will be completely reset if this value is changed.
+            </summary>
+        </member>
         <member name="P:Rewired.ReInput.ConfigHelper.alwaysUseUnityInput">
             <summary>
             Toggles the use of Unity input during runtime. Rewired will be completely reset if this value is changed.
-            This is the same as disableNativeInput.
+            This is an alias for disableNativeInput.
             </summary>
         </member>
         <member name="P:Rewired.ReInput.ConfigHelper.disableNativeInput">
             <summary>
             Toggles the use of Unity input during runtime. Rewired will be completely reset if this value is changed.
-            This is the same as alwaysUseUnityInput.
             </summary>
         </member>
         <member name="P:Rewired.ReInput.ConfigHelper.nativeMouseSupport">
@@ -11992,14 +12554,30 @@
             Toggles the use of native mouse handling during runtime. Rewired will be completely reset if this value is changed.
             </summary>
         </member>
+        <member name="P:Rewired.ReInput.ConfigHelper.nativeKeyboardSupport">
+            <summary>
+            Toggles the use of native keyboard handling during runtime. Rewired will be completely reset if this value is changed.
+            </summary>
+        </member>
         <member name="P:Rewired.ReInput.ConfigHelper.enhancedDeviceSupport">
             <summary>
             Toggles the use of enhanced device support during runtime. Rewired will be completely reset if this value is changed.
             </summary>
         </member>
+        <member name="P:Rewired.ReInput.ConfigHelper.joystickRefreshRate">
+            <summary>
+            The joystick refresh rate in frames per second. [0 - 2000] [0 = Default]
+            Set this to a higher value if you need higher precision input timing at high frame rates such as for a music beat game. Higher values result in higher CPU usage. Note that setting this to a very high value when the game is running at a low frame rate will not result in higher precision input.
+            This settings only applies to input sources that use a separate thread to poll for joystick input values (currently XInput and Direct Input). This setting does not apply to event-based input sources such as Raw Input.
+            This setting can be changed without resetting Rewired.
+            </summary>
+        </member>
         <member name="P:Rewired.ReInput.ConfigHelper.ignoreInputWhenAppNotInFocus">
             <summary>
-            Ignores input if the application is not in focus This setting has no effect on some platforms. NOTE: Disabling this does not guarantee that input will be processed when the application is out of focus. Whether input is received by the application or not is dependent on A) the input device type B) the current platform C) the input source(s) being used. This setting can be changed without resetting Rewired.
+            Ignores input if the application is not in focus This setting has no effect on some platforms.
+            NOTE: Disabling this does not guarantee that input will be processed when the application is out of focus.
+            Whether input is received by the application or not is dependent on A) the input device type B) the current platform C) the input source(s) being used.
+            This setting can be changed without resetting Rewired.
             </summary>
         </member>
         <member name="P:Rewired.ReInput.ConfigHelper.android_supportUnknownGamepads">
@@ -12018,6 +12596,15 @@
             If enabled, the corner directions on all hats will activate the adjacent 2 cardinal direction buttons instead of the corner button.
             This is useful if you need joystick hats to behave like D-Pads instead of 8-way hats.
             This setting can be changed without resetting Rewired.
+            </summary>
+        </member>
+        <member name="P:Rewired.ReInput.ConfigHelper.deferControllerConnectedEventsOnStart">
+            <summary>
+            Defer controller connected events for controllers already connected when Rewired initializes until the Start event instead of
+            during initialization. Normally, it's impossible to receive controller connection events at the start of runtime because Rewired
+            initializes before any other script is able to subscribe to the controller connected event. Enabling this will defer the controller
+            connected events until the Start event, allowing your scripts to subscribe to the controller connected event in Awake and still
+            receive the event callback. If disabled, controller connection events for controllers already connected before runtime starts will be missed.
             </summary>
         </member>
         <member name="P:Rewired.ReInput.ConfigHelper.autoAssignJoysticks">
@@ -13552,6 +14139,62 @@
             Do not call this anywhere except within Read
             </summary>
         </member>
+        <member name="T:Rewired.Utils.Classes.Data.SimpleNativeRingBuffer">
+            <summary>
+            A simple, fast ring buffer that uses native memory.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.#ctor(System.Int32)">
+            <summary>
+            Creates a new buffer.
+            </summary>
+            <param name="size">The size of the buffer in bytes.</param>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.Write(System.IntPtr,System.Int32,Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.Handle@)">
+            <summary>
+            Writes data to the buffer.
+            </summary>
+            <param name="source">Source data pointer.</param>
+            <param name="length">Length of the data in bytes.</param>
+            <param name="handle">Handle to the data new entry.</param>
+            <returns>True on success, false on failure.</returns>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.Read(Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.Handle,System.Byte[])">
+            <summary>
+            Read from the buffer.
+            </summary>
+            <param name="handle">Handle to the position in the buffer. Includes the number of bytes to read.</param>
+            <param name="buffer">The buffer to fill.</param>
+            <returns>Number of bytes read.</returns>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.Read(Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.Handle,System.IntPtr,System.Int32)">
+            <summary>
+            Read from the buffer.
+            </summary>
+            <param name="handle">Handle to the position in the buffer. Includes the number of bytes to read.</param>
+            <param name="buffer">The buffer to fill.</param>
+            <returns>Number of bytes read.</returns>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.GetPointer(Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.Handle)">
+            <summary>
+            Get a pointer to memory from a Handle.
+            </summary>
+            <param name="handle">Handle to the position in the buffer.</param>
+            <returns>The pointer. Returns IntPtr.Zero if the Handle was invalid.</returns>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.TryGetPointer(Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.Handle,System.IntPtr@)">
+            <summary>
+            Try to get a pointer to memory from a Handle.
+            </summary>
+            <param name="handle">Handle to the position in the buffer.</param>
+            <param name="pointer">he pointer. IntPtr.Zero if the Handle was invalid.</param>
+            <returns>True on success, false on failure.</returns>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Data.SimpleNativeRingBuffer.size">
+            <summary>
+            The size of the buffer in bytes.
+            </summary>
+        </member>
         <member name="T:Rewired.Utils.Classes.Data.PinnedGenericArrayBuffer">
             <summary>
             This buffer allows you to store an Array of any type to be used as a native buffer
@@ -13580,6 +14223,36 @@
             This can be called directly on a null object because it's a static
             extension method.
             </summary>
+        </member>
+        <member name="T:Rewired.Utils.Libraries.TinyJson.SerializeAttribute">
+            <exclude></exclude>
+            <summary>
+            Serialize and deserialize a field/property with a different name.
+            If used on a private field, performs the same function as SerializeAttribute as well.
+            </summary>
+        </member>
+        <member name="F:Rewired.Utils.Libraries.TinyJson.SerializeAttribute.Name">
+            <summary>
+            An optional substitute name to use when serialized and deserialized.
+            </summary>
+        </member>
+        <member name="T:Rewired.Utils.Libraries.TinyJson.JsonParser">
+            <exclude></exclude>
+        </member>
+        <member name="M:Rewired.Utils.Libraries.TinyJson.JsonParser.FromJson``1(System.String)">
+            <exclude></exclude>
+            <summary>
+            Converts a json string to an object.
+            WARNING: Class types inside DLLs that you use this on MUST use the Rewired.Utils.Attributes.PreserveAttribute on the class if the default constructor
+            is never actively used in code or the default constructor will be stripped out by IL2CPP!
+            [Preserve]
+            </summary>
+        </member>
+        <member name="T:Rewired.Utils.Libraries.TinyJson.JsonWriter">
+            <exclude></exclude>
+        </member>
+        <member name="M:Rewired.Utils.Libraries.TinyJson.JsonWriter.ToJson(System.Object)">
+            <exclude></exclude>
         </member>
         <member name="T:Rewired.Utils.SafeDelegate">
             <summary>
@@ -13709,16 +14382,56 @@
             Compares absolute values. If magnitude of a >= b, a will be returned.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.SByte,System.SByte)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.Byte,System.Byte)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.Int16,System.Int16)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.UInt16,System.UInt16)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.Int32,System.Int32)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.UInt32,System.UInt32)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.Int64,System.Int64)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.UInt64,System.UInt64)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.Single,System.Single)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(System.Double,System.Double)" -->
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.SByte,System.SByte)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.Byte,System.Byte)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.Int16,System.Int16)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.UInt16,System.UInt16)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.Int32,System.Int32)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.UInt32,System.UInt32)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.Int64,System.Int64)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.UInt64,System.UInt64)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.Single,System.Single)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(System.Double,System.Double)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
         <member name="M:Rewired.Utils.MathTools.MaxMagnitude(UnityEngine.Vector2,UnityEngine.Vector2)">
             <summary>
             Compares absolute values. If magnitude of a >= b, a will be returned.
@@ -13729,8 +14442,16 @@
             Compares absolute values. If magnitude of a >= b, a will be returned.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(UnityEngine.Vector2,UnityEngine.Vector2)" -->
-        <!-- Badly formed XML comment ignored for member "M:Rewired.Utils.MathTools.MinMagnitude(UnityEngine.Vector3,UnityEngine.Vector3)" -->
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(UnityEngine.Vector2,UnityEngine.Vector2)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.MathTools.MinMagnitude(UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            Compares absolute values. If magnitude of a &lt;= b, a will be returned.
+            </summary>
+        </member>
         <member name="M:Rewired.Utils.MiscTools.CreateGuidHashSHA256(System.String)">
             <summary>
             Generate a GUID from a string by first creating a SHA256 hash, then truncating to the first 16 bytes to create the GUID.
@@ -14199,47 +14920,98 @@
             Warning: Memory allocations in Unity 4.x!
             </summary>
         </member>
-        <member name="M:Rewired.Utils.Classes.Utility.ThreadHelper.SetRefreshRate(System.Int32)">
+        <member name="M:Rewired.Utils.Classes.Utility.ThreadHelper.Start(System.Boolean)">
             <summary>
-            Set the refresh rate of the thread in FPS.
+            Starts the thread.
             </summary>
-            <param name="framesPerSecond">FPS. 0 = No thread sleep.</param>
-            <returns>Success</returns>
+            <param name="wait">Should the executing thread wait until the thread starts?</param>
+            <returns>Returns false if the thread is already running or if an exception occurs while starting the thread.</returns>
         </member>
-        <member name="E:Rewired.Utils.Classes.Utility.ThreadHelper._ThreadUpdateEvent">
+        <member name="M:Rewired.Utils.Classes.Utility.ThreadHelper.Stop(System.Boolean)">
             <summary>
-            Called from within the thread.
+            Stops the thread.
             </summary>
+            <param name="wait">Wait for the thread to stop before continuing?</param>
         </member>
-        <member name="E:Rewired.Utils.Classes.Utility.ThreadHelper._ThreadStartedEvent">
+        <member name="M:Rewired.Utils.Classes.Utility.ThreadHelper.EnqueueAction(System.Action)">
             <summary>
-            Called from within the thread.
+            Enqueues an Action to be run on the thread.
             </summary>
+            <param name="action">The Action to invoke.</param>
+            <returns>Returns false if the thread is not running or the Action is null.</returns>
         </member>
-        <member name="E:Rewired.Utils.Classes.Utility.ThreadHelper._ThreadPreStopEvent">
+        <member name="M:Rewired.Utils.Classes.Utility.ThreadHelper.InvokeActionSync(System.Action)">
             <summary>
-            Called from within the thread.
+            Invokes the incoming Action on the thread synchronously.
+            The calling thread will halt until execution of the Action is finished.
+            If there are other Actions in the queue, all Actions will be processed
+            before execution is resumed in the calling thread.
             </summary>
+            <param name="action">The Action to invoke.</param>
+            <returns>Returns false if the thread is not running or the Action is null.</returns>
         </member>
-        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.RefreshRate">
+        <member name="M:Rewired.Utils.Classes.Utility.ThreadHelper.WaitForActionQueueToFinish">
             <summary>
-            The refresh rate of the thread in frames per second.
-            If 0, refresh rate is uncapped.
-            </summary>
-        </member>
-        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.KillTimeout">
-            <summary>
-            Time thread will run before it will automatically stopped in milliseconds.
-            </summary>
-        </member>
-        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.TimeElapsed">
-            <summary>
-            The time the thread has been running or ran if stopped in seconds.
+            Stops the calling thread execution until all Actions in the queue have finished processing.
             </summary>
         </member>
-        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.TimeElapsedMS">
+        <member name="M:Rewired.Utils.Classes.Utility.ThreadHelper.ResetTimeout">
             <summary>
-            The time the thread has been running or ran if stopped in milliseconds.
+            Resets the timeout timer so the thread does not self-terminate.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.isRunning">
+            <summary>
+            Is the thread currently running?
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.isStopped">
+            <summary>
+            Is the thread stopped?
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.useHighPrecitionTimer">
+            <summary>
+            Is the high precision timer being used? This greatly increases CPU resources because the thread does not sleep.
+            Note: This is enabled automatically if using a fixed time step and FPS is set to the FORCE_HIGH_PRECISION_TIMER_AT_FPS threshold or above.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.useFixedTimeStep">
+            <summary>
+            Is the thread running on a fixed time step?
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.fixedTimeStepFPS">
+            <summary>
+            The thread fixed time step interval in frames per second. [0 = Continuous]
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.timeoutMS">
+            <summary>
+            The self-termination timeout in milliseconds. [0 = No timeout]
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.ThreadHelper.tick">
+            <summary>
+            The number of thread ticks that have elapsed since the thread was started.
+            </summary>
+        </member>
+        <member name="E:Rewired.Utils.Classes.Utility.ThreadHelper.ThreadUpdateEvent">
+            <summary>
+            Event fires once per thread tick.
+            This event is fired from the thread.
+            </summary>
+        </member>
+        <member name="E:Rewired.Utils.Classes.Utility.ThreadHelper.ThreadStartedEvent">
+            <summary>
+            Fires when the thread starts.
+            This event is fired from the thread.
+            </summary>
+        </member>
+        <member name="E:Rewired.Utils.Classes.Utility.ThreadHelper.ThreadPreStopEvent">
+            <summary>
+            Fires just before the thread stops.
+            This event is fired from the thread.
             </summary>
         </member>
         <member name="T:Rewired.Utils.Classes.Utility.ThreadedMessageQueue`1">
@@ -14342,6 +15114,7 @@
             Call StartRead before reading to fill the buffer with new data.
             </summary>
             <param name="buffer">Buffer to fill with data</param>
+            <param name="bufferLength">The length of the buffer in bytes.</param>
             <param name="numBytesToRead">Number of bytes to read into the buffer</param>
             <returns>Number of bytes read</returns>
         </member>
@@ -14360,6 +15133,7 @@
             This can be called by a separate thread.
             </summary>
             <param name="buffer">Buffer from which to write.</param>
+            <param name="bufferLength">The length of the buffer in bytes.</param>
             <param name="numBytesToWrite">Number of bytes to write to the buffer.</param>
             <returns>Number of bytes written</returns>
         </member>
@@ -14378,7 +15152,7 @@
         </member>
         <member name="T:Rewired.Utils.Classes.Utility.Pinner">
             <summary>
-            Pins an object .
+            Pins an object.
             Use with using statement.
             </summary>
         </member>
@@ -14386,6 +15160,113 @@
             <summary>
             Sets a value temporarily. Value is restored when destroyed.
             Use with using statement.
+            </summary>
+        </member>
+        <member name="T:Rewired.Utils.Classes.Utility.Stopwatch">
+            <summary>
+            A stopwatch class that wraps System.Diagnostics.Stopwatch.
+            Supports a global stopwatch that always runs and time offset.
+            </summary>
+        </member>
+        <member name="F:Rewired.Utils.Classes.Utility.Stopwatch.Global">
+            <summary>
+            Gets the Global Stopwatch instance.
+            This Stopwatch is started automatically in the static constructor
+            and continues to run forever. It cannot be stopped or reset.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Utility.Stopwatch.#cctor">
+            <summary>
+            Static constructor for Stopwatch.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Utility.Stopwatch.StartNew">
+            <summary>
+            Creates a new stopwatch and starts it.
+            </summary>
+            <returns>Stopwatch</returns>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Utility.Stopwatch.ConvertTo100NSTicks(System.Int64)">
+            <summary>
+            Converts Stopwatch ticks to 100 ns ticks.
+            </summary>
+            <param name="ticks">Number of Stopwatch ticks.</param>
+            <returns>100 ns ticks.</returns>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Utility.Stopwatch.#ctor">
+            <summary>
+            Creates an instance of the Stopwatch class.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Utility.Stopwatch.Stop">
+            <summary>
+            Stops the stopwatch.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Utility.Stopwatch.Start">
+            <summary>
+            Starts the stopwatch
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Utility.Stopwatch.Reset">
+            <summary>
+            Resets the stopwatch
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.frequency">
+            <summary>
+            The frequency of all stopwatches in ticks per second.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.offsetSeconds">
+            <summary>
+            Time in seconds to offset all returned time values.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.offsetTicks">
+            <summary>
+            The time in ticks to offset all returned time values.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.elapsedSeconds">
+            <summary>
+            Time in seconds since the stopwatch was started.
+            This value is modified by the offset property.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.elapsedSecondsRaw">
+            <summary>
+            Time in seconds since the stopwatch was started.
+            This value is not modified by the offset property.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.elapsedMilliseconds">
+            <summary>
+            Time in milliseconds since the stopwatch was started.
+            This value is modified by the offset property.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.elapsedMillisecondsRaw">
+            <summary>
+            Time in milliseconds since the stopwatch was started.
+            This value is not modified by the offset property.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.elapsedTicks">
+            <summary>
+            The number of ticks that have elapsed since the stopwatch was started.
+            This value is modified by the offset property.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.elapsedTicksRaw">
+            <summary>
+            The number of ticks that have elapsed since the stopwatch was started.
+            This value is not modified by the offset property.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Utility.Stopwatch.isRunning">
+            <summary>
+            Is the stopwatch currently running?
             </summary>
         </member>
         <member name="T:Rewired.Platforms.XboxOne.IXboxOneInputSource">

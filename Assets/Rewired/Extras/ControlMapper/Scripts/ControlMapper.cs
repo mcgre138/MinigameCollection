@@ -39,7 +39,7 @@ namespace Rewired.UI.ControlMapper {
         [SerializeField]
         [Tooltip("Must be assigned a Rewired Input Manager scene object or prefab.")]
         private InputManager _rewiredInputManager;
-        
+
         [SerializeField]
         [Tooltip("Set to True to prevent the Game Object from being destroyed when a new scene is loaded.\n\nNOTE: Changing this value from True to False at runtime will have no effect because Object.DontDestroyOnLoad cannot be undone once set.")]
         private bool _dontDestroyOnLoad;
@@ -241,8 +241,208 @@ namespace Rewired.UI.ControlMapper {
 
         #region Events
 
-        public event System.Action ScreenClosedEvent;
-        public event System.Action ScreenOpenedEvent;
+        // .NET events
+
+        private System.Action _ScreenClosedEvent;
+        private System.Action _ScreenOpenedEvent;
+        private System.Action _PopupWindowOpenedEvent;
+        private System.Action _PopupWindowClosedEvent;
+        private System.Action _InputPollingStartedEvent;
+        private System.Action _InputPollingEndedEvent;
+
+        /// <summary>
+        /// Event sent when the UI is closed.
+        /// This is a .NET event. If you are using Unity Events,
+        /// use the onScreenClosed event.
+        /// </summary>
+        public event System.Action ScreenClosedEvent {
+            add {
+                _ScreenClosedEvent += value;
+            }
+            remove {
+                _ScreenClosedEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// Event sent when the UI is opened.
+        /// This is a .NET event. If you are using Unity Events,
+        /// use the onScreenOpened event.
+        /// </summary>
+        public event System.Action ScreenOpenedEvent {
+            add {
+                _ScreenOpenedEvent += value;
+            }
+            remove {
+                _ScreenOpenedEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// Event sent when a popup window is closed.
+        /// This is a .NET event. If you are using Unity Events,
+        /// use the onPopupWindowClosed event.
+        /// </summary>
+        public event System.Action PopupWindowClosedEvent {
+            add {
+                _PopupWindowClosedEvent += value;
+            }
+            remove {
+                _PopupWindowClosedEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// Event sent when a popup window is opened.
+        /// This is a .NET event. If you are using Unity Events,
+        /// use the onPopupWindowOpened event.
+        /// </summary>
+        public event System.Action PopupWindowOpenedEvent {
+            add {
+                _PopupWindowOpenedEvent += value;
+            }
+            remove {
+                _PopupWindowOpenedEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// Event sent when polling for input has started.
+        /// This is a .NET event. If you are using Unity Events,
+        /// use the onInputPollingStarted event.
+        /// </summary>
+        public event System.Action InputPollingStartedEvent {
+            add {
+                _InputPollingStartedEvent += value;
+            }
+            remove {
+                _InputPollingStartedEvent -= value;
+            }
+        }
+
+        /// <summary>
+        /// Event sent when polling for input has ended.
+        /// This is a .NET event. If you are using Unity Events,
+        /// use the onInputPollingStopped event.
+        /// </summary>
+        public event System.Action InputPollingEndedEvent {
+            add {
+                _InputPollingEndedEvent += value;
+            }
+            remove {
+                _InputPollingEndedEvent -= value;
+            }
+        }
+
+        // Unity events
+
+        [SerializeField]
+        [Tooltip("Event sent when the UI is closed.")]
+        private UnityEvent _onScreenClosed;
+
+        [SerializeField]
+        [Tooltip("Event sent when the UI is opened.")]
+        private UnityEvent _onScreenOpened;
+
+        [SerializeField]
+        [Tooltip("Event sent when a popup window is closed.")]
+        private UnityEvent _onPopupWindowClosed;
+
+        [SerializeField]
+        [Tooltip("Event sent when a popup window is opened.")]
+        private UnityEvent _onPopupWindowOpened;
+
+        [SerializeField]
+        [Tooltip("Event sent when polling for input has started.")]
+        private UnityEvent _onInputPollingStarted;
+
+        [SerializeField]
+        [Tooltip("Event sent when polling for input has ended.")]
+        private UnityEvent _onInputPollingEnded;
+
+        /// <summary>
+        /// Unity event sent when the UI is closed.
+        /// This is a Unity event. For the .NET event,
+        /// use ScreenClosedEvent.
+        /// </summary>
+        public event UnityAction onScreenClosed {
+            add {
+                _onScreenClosed.AddListener(value); 
+            }
+            remove {
+                _onScreenClosed.RemoveListener(value);
+            }
+        }
+
+        /// <summary>
+        /// Unity event sent when the UI is opened.
+        /// This is a Unity event. For the .NET event,
+        /// use ScreenOpenedEvent.
+        /// </summary>
+        public event UnityAction onScreenOpened {
+            add {
+                _onScreenOpened.AddListener(value);
+            }
+            remove {
+                _onScreenOpened.RemoveListener(value);
+            }
+        }
+
+        /// <summary>
+        /// Unity event sent when a popup window is closed.
+        /// This is a Unity event. For the .NET event,
+        /// use PopupWindowClosedEvent.
+        /// </summary>
+        public event UnityAction onPopupWindowClosed {
+            add {
+                _onPopupWindowClosed.AddListener(value);
+            }
+            remove {
+                _onPopupWindowClosed.RemoveListener(value);
+            }
+        }
+
+        /// <summary>
+        /// Unity event sent when a popup window is opened.
+        /// This is a Unity event. For the .NET event,
+        /// use PopupWindowOpenedEvent.
+        /// </summary>
+        public event UnityAction onPopupWindowOpened {
+            add {
+                _onPopupWindowOpened.AddListener(value);
+            }
+            remove {
+                _onPopupWindowOpened.RemoveListener(value);
+            }
+        }
+
+        /// <summary>
+        /// Unity event sent when polling for input has started.
+        /// This is a Unity event. For the .NET event,
+        /// use InputPollingStartedEvent.
+        /// </summary>
+        public event UnityAction onInputPollingStarted {
+            add {
+                _onInputPollingStarted.AddListener(value);
+            }
+            remove {
+                _onInputPollingStarted.RemoveListener(value);
+            }
+        }
+
+        /// <summary>
+        /// Unity event sent when polling for input has ended.
+        /// This is a Unity event. For the .NET event,
+        /// use InputPollingEndedEvent.
+        /// </summary>
+        public event UnityAction onInputPollingEnded {
+            add {
+                _onInputPollingEnded.AddListener(value);
+            }
+            remove {
+                _onInputPollingEnded.RemoveListener(value);
+            }
+        }
 
         #endregion
 
@@ -250,7 +450,6 @@ namespace Rewired.UI.ControlMapper {
 
         private static ControlMapper Instance;
 
-        private bool inputEventsInitialized;
         private bool initialized;
         private int playerCount;
 
@@ -267,12 +466,15 @@ namespace Rewired.UI.ControlMapper {
         private GameObject lastUISelection;
         private int currentJoystickId = -1;
         private float blockInputOnFocusEndTime;
+        private bool isPollingForInput;
 
         private InputMapping pendingInputMapping;
         private AxisCalibrator pendingAxisCalibration;
 
         private System.Action<InputFieldInfo> inputFieldActivatedDelegate;
         private System.Action<ToggleInfo, bool> inputFieldInvertToggleStateChangedDelegate;
+
+        private System.Action _restoreDefaultsDelegate;
 
         #endregion
 
@@ -334,6 +536,8 @@ namespace Rewired.UI.ControlMapper {
         public bool showMapCategoriesGroupLabel { get { return _showMapCategoriesGroupLabel; } set { _showMapCategoriesGroupLabel = value; InspectorPropertyChanged(true); } }
         public bool showControllerNameLabel { get { return _showControllerNameLabel; } set { _showControllerNameLabel = value; InspectorPropertyChanged(true); } }
         public bool showAssignedControllers { get { return _showAssignedControllers; } set { _showAssignedControllers = value; InspectorPropertyChanged(true); } }
+
+        public System.Action restoreDefaultsDelegate { get { return _restoreDefaultsDelegate; } set { _restoreDefaultsDelegate = value; } }
 
         #endregion
 
@@ -418,13 +622,13 @@ namespace Rewired.UI.ControlMapper {
 
         #endregion
 
-        #region Unity Events
+        #region MonoBehaviour Events
 
         void Awake() {
             if(_dontDestroyOnLoad) {
                 DontDestroyOnLoad(transform.gameObject);
             }
-        
+
             PreInitialize();
 
             // Open immediately if instantiated with canvas active
@@ -731,7 +935,7 @@ namespace Rewired.UI.ControlMapper {
             if(!isFocused) return; // a window is open, so do nothing
             Close(true); // no window is open, close the mapper
         }
-        
+
         private void OnScreenOpenActionPressed(InputActionEventData data) {
             Open();
         }
@@ -834,7 +1038,7 @@ namespace Rewired.UI.ControlMapper {
             } else { // remove from all players
                 ReInput.controllers.conflictChecking.RemoveElementAssignmentConflicts(conflictCheck);
             }
-            
+
             // Create the new mapping or replace existing
             mapping.map.ReplaceOrCreateElementMap(assignment);
             CloseWindow(windowId);
@@ -849,15 +1053,19 @@ namespace Rewired.UI.ControlMapper {
         }
 
         private void OnRestoreDefaultsConfirmed(int windowId) {
-            IList<Player> players = ReInput.players.Players;
-            for(int i = 0; i < players.Count; i++) {
-                Player player = players[i];
-                if(_showControllers) player.controllers.maps.LoadDefaultMaps(ControllerType.Joystick);
-                if(_showKeyboard) player.controllers.maps.LoadDefaultMaps(ControllerType.Keyboard);
-                if(_showMouse) player.controllers.maps.LoadDefaultMaps(ControllerType.Mouse);
+            if(_restoreDefaultsDelegate == null) {
+                IList<Player> players = ReInput.players.Players;
+                for(int i = 0; i < players.Count; i++) {
+                    Player player = players[i];
+                    if(_showControllers) player.controllers.maps.LoadDefaultMaps(ControllerType.Joystick);
+                    if(_showKeyboard) player.controllers.maps.LoadDefaultMaps(ControllerType.Keyboard);
+                    if(_showMouse) player.controllers.maps.LoadDefaultMaps(ControllerType.Mouse);
+                }
             }
-
             CloseWindow(windowId);
+            if(_restoreDefaultsDelegate != null) {
+                _restoreDefaultsDelegate();
+            }
         }
 
         #endregion
@@ -870,8 +1078,11 @@ namespace Rewired.UI.ControlMapper {
             Window window = windowManager.GetWindow(windowId);
             if(windowId < 0) return;
 
+            InputPollingStarted();
+
             // Check the close window timer
             if(window.timer.finished) { // timer expired
+                InputPollingStopped();
                 CloseWindow(windowId); // close the window
                 return;
             }
@@ -879,6 +1090,9 @@ namespace Rewired.UI.ControlMapper {
             // Poll for controller element down
             ControllerPollingInfo info = ReInput.controllers.polling.PollAllControllersOfTypeForFirstElementDown(ControllerType.Joystick);
             if(info.success) {
+
+                InputPollingStopped();
+
                 // Check if another Player has this controller already
                 if(ReInput.controllers.IsControllerAssigned(ControllerType.Joystick, info.controllerId) &&
                     !currentPlayer.controllers.ContainsController(ControllerType.Joystick, info.controllerId)) { // another player has the controller
@@ -902,6 +1116,8 @@ namespace Rewired.UI.ControlMapper {
             if(windowId < 0) return;
 
             if(pendingInputMapping == null) return;
+
+            InputPollingStarted();
 
             // Check the close window timer
             if(window.timer.finished) { // timer expired
@@ -939,8 +1155,11 @@ namespace Rewired.UI.ControlMapper {
 
             if(pendingInputMapping == null) return;
 
+            InputPollingStarted();
+
             // Check the close window timer
             if(window.timer.finished) { // timer expired
+                InputPollingStopped();
                 CloseWindow(windowId); // close the window
                 return;
             }
@@ -960,8 +1179,10 @@ namespace Rewired.UI.ControlMapper {
 
             if(!HasElementAssignmentConflicts(currentPlayer, pendingInputMapping, assignment, false)) {
                 pendingInputMapping.map.ReplaceOrCreateElementMap(assignment);
+                InputPollingStopped();
                 CloseWindow(windowId);
             } else {
+                InputPollingStopped();
                 ShowElementAssignmentConflictWindow(assignment, false);
             }
         }
@@ -974,8 +1195,11 @@ namespace Rewired.UI.ControlMapper {
 
             if(pendingInputMapping == null) return;
 
+            InputPollingStarted();
+
             // Check the close window timer
             if(window.timer.finished) { // timer expired
+                InputPollingStopped();
                 CloseWindow(windowId); // close the window
                 return;
             }
@@ -986,7 +1210,7 @@ namespace Rewired.UI.ControlMapper {
             string label;
 
             PollKeyboardForAssignment(out pollingInfo, out modifierKeyPressed, out modifierFlags, out label);
-            
+
             if(modifierKeyPressed) window.timer.Start(_inputAssignmentTimeout); // reset close timer if a modifier key is pressed
 
             // Show the window close timer
@@ -1004,8 +1228,10 @@ namespace Rewired.UI.ControlMapper {
 
             if(!HasElementAssignmentConflicts(currentPlayer, pendingInputMapping, assignment, false)) {
                 pendingInputMapping.map.ReplaceOrCreateElementMap(assignment);
+                InputPollingStopped();
                 CloseWindow(windowId);
             } else {
+                InputPollingStopped();
                 ShowElementAssignmentConflictWindow(assignment, false);
             }
         }
@@ -1018,8 +1244,11 @@ namespace Rewired.UI.ControlMapper {
 
             if(pendingInputMapping == null) return;
 
+            InputPollingStarted();
+
             // Check the close window timer
             if(window.timer.finished) { // timer expired
+                InputPollingStopped();
                 CloseWindow(windowId); // close the window
                 return;
             }
@@ -1051,8 +1280,10 @@ namespace Rewired.UI.ControlMapper {
 
             if(!HasElementAssignmentConflicts(currentPlayer, pendingInputMapping, assignment, true)) {
                 pendingInputMapping.map.ReplaceOrCreateElementMap(assignment);
+                InputPollingStopped();
                 CloseWindow(windowId);
             } else {
+                InputPollingStopped();
                 ShowElementAssignmentConflictWindow(assignment, true);
             }
         }
@@ -1064,6 +1295,8 @@ namespace Rewired.UI.ControlMapper {
             if(windowId < 0) return;
 
             if(pendingAxisCalibration == null || !pendingAxisCalibration.isValid) return;
+
+            InputPollingStarted();
 
             // Check the close window timer
             if(window.timer.finished) { // timer expired
@@ -1112,6 +1345,7 @@ namespace Rewired.UI.ControlMapper {
 
             Success:
             EndAxisCalibration(); // commit the calibration
+            InputPollingStopped();
             CloseWindow(windowId); // close this window
         }
 
@@ -1327,7 +1561,7 @@ namespace Rewired.UI.ControlMapper {
             UnityAction cancelCallback = () => { OnWindowCancel(window.id); };
             window.cancelCallback = cancelCallback;
             window.CreateButton(prefabs.fitButton, UI.UIPivot.BottomLeft, UI.UIAnchor.BottomLeft, Vector2.zero, _language.yes, () => { OnMouseAssignmentConfirmed(window.id, currentPlayer); }, cancelCallback, true);
-            window.CreateButton(prefabs.fitButton, UI.UIPivot.BottomRight, UI.UIAnchor.BottomRight, Vector2.zero, _language.no, cancelCallback, cancelCallback,false);
+            window.CreateButton(prefabs.fitButton, UI.UIPivot.BottomRight, UI.UIAnchor.BottomRight, Vector2.zero, _language.no, cancelCallback, cancelCallback, false);
             windowManager.Focus(window);
         }
 
@@ -1530,7 +1764,7 @@ namespace Rewired.UI.ControlMapper {
             // Actions column header
             references.inputGridHeader1 = CreateNewColumnGroup("ActionsHeader", references.inputGridHeadersGroup, _actionLabelWidth).transform;
             CreateLabel(prefabs.inputGridHeaderLabel, _language.actionColumnLabel, references.inputGridHeader1, Vector2.zero);
-            
+
             // Keyboard column header
             if(_showKeyboard) {
                 references.inputGridHeader2 = CreateNewColumnGroup("KeybordHeader", references.inputGridHeadersGroup, _keyboardColMaxWidth).transform;
@@ -2112,7 +2346,7 @@ namespace Rewired.UI.ControlMapper {
 
             // Reset assigned controllers group
             if(ShowAssignedControllers()) {
-                
+
                 // Clear assigned controller buttons
                 foreach(GUIButton button in assignedControllerButtons) {
                     if(button.gameObject == null) continue;
@@ -2373,16 +2607,21 @@ namespace Rewired.UI.ControlMapper {
             if(!windowManager.isWindowOpen) return;
             windowManager.CancelAll();
             ChildWindowClosed();
+            InputPollingStopped();
         }
 
         private void ChildWindowOpened() {
             if(!windowManager.isWindowOpen) return; // do nothing if a window is not open
             SetIsFocused(false);
+            if(_PopupWindowOpenedEvent != null) _PopupWindowOpenedEvent();
+            if(_onPopupWindowOpened != null) _onPopupWindowOpened.Invoke();
         }
 
         private void ChildWindowClosed() {
             if(windowManager.isWindowOpen) return; // do nothing if a window is still open
             SetIsFocused(true);
+            if(_PopupWindowClosedEvent != null) _PopupWindowClosedEvent();
+            if(_onPopupWindowClosed != null) _onPopupWindowClosed.Invoke();
         }
 
         #endregion
@@ -2420,7 +2659,7 @@ namespace Rewired.UI.ControlMapper {
                     if(!conflict.isUserAssignable) return true;
                 }
             }
-            
+
             return false;
         }
 
@@ -2563,7 +2802,7 @@ namespace Rewired.UI.ControlMapper {
             if(EventSystem.current == null) return;
             EventSystem.current.SetSelectedGameObject(selection);
         }
-        
+
         private void RestoreLastUISelection() {
             if(lastUISelection == null || !lastUISelection.activeInHierarchy) {
                 SetDefaultUISelection();
@@ -2591,7 +2830,7 @@ namespace Rewired.UI.ControlMapper {
                 break;
             }
             if(currentMapCategoryId < 0) return; // invalid, no map cats found
-            
+
             // Disable the selected button and enable others
             for(int i = 0; i < _mappingSets.Length; i++) {
                 bool state = _mappingSets[i].mapCategoryId == currentMapCategoryId ? false : true;
@@ -2615,7 +2854,7 @@ namespace Rewired.UI.ControlMapper {
         private void SetIsFocused(bool state) {
             // Set interactible state on main page controls
             references.mainCanvasGroup.interactable = state;
-            
+
             if(state) { // just received focus
                 Redraw(false, false);
                 RestoreLastUISelection();
@@ -2642,7 +2881,8 @@ namespace Rewired.UI.ControlMapper {
             SelectDefaultMapCategory(false);
             SetDefaultUISelection();
             Redraw(true, false);
-            if(ScreenOpenedEvent != null) ScreenOpenedEvent();
+            if(_ScreenOpenedEvent != null) _ScreenOpenedEvent();
+            if(_onScreenOpened != null) _onScreenOpened.Invoke();
         }
 
         public void Close(bool save) {
@@ -2654,7 +2894,8 @@ namespace Rewired.UI.ControlMapper {
             Clear();
             canvas.SetActive(false);
             SetUISelection(null); // deselect
-            if(ScreenClosedEvent != null) ScreenClosedEvent();
+            if(_ScreenClosedEvent != null) _ScreenClosedEvent();
+            if(_onScreenClosed != null) _onScreenClosed.Invoke();
         }
 
         #endregion
@@ -2666,6 +2907,7 @@ namespace Rewired.UI.ControlMapper {
             lastUISelection = null;
             pendingInputMapping = null;
             pendingAxisCalibration = null;
+            InputPollingStopped();
         }
 
         private void ClearCompletely() {
@@ -2677,7 +2919,7 @@ namespace Rewired.UI.ControlMapper {
 
             windowManager.ClearCompletely();
             inputGrid.ClearAll();
-            
+
             foreach(GUIButton item in playerButtons) {
                 Object.Destroy(item.gameObject);
             }
@@ -2731,6 +2973,8 @@ namespace Rewired.UI.ControlMapper {
 
             inputFieldActivatedDelegate = null;
             inputFieldInvertToggleStateChangedDelegate = null;
+
+            isPollingForInput = false;
         }
 
         public void Reset() {
@@ -2797,7 +3041,7 @@ namespace Rewired.UI.ControlMapper {
 
         private int GetDefaultMapCategoryId() {
             if(_mappingSets.Length == 0) return 0; // use Default
-            
+
             // Get the first valid map category id we find
             for(int i = 0; i < _mappingSets.Length; i++) {
                 if(ReInput.mapping.GetMapCategory(_mappingSets[i].mapCategoryId) == null) continue;
@@ -2825,7 +3069,7 @@ namespace Rewired.UI.ControlMapper {
 
             // Set up player menu close event
             SubscribeRewiredInputEventAllPlayers(_screenCloseAction, OnScreenCloseActionPressed);
-            
+
             // Set up universal cancel event
             SubscribeRewiredInputEventAllPlayers(_universalCancelAction, OnUniversalCancelActionPressed);
         }
@@ -2951,6 +3195,24 @@ namespace Rewired.UI.ControlMapper {
             return true;
         }
 
+        private void InputPollingStarted() {
+            bool prev = isPollingForInput;
+            isPollingForInput = true;
+            if(!prev) {
+                if(_InputPollingStartedEvent != null) _InputPollingStartedEvent();
+                if(_onInputPollingStarted != null) _onInputPollingStarted.Invoke();
+            }
+        }
+
+        private void InputPollingStopped() {
+            bool prev = isPollingForInput;
+            isPollingForInput = false;
+            if(prev) {
+                if(_InputPollingEndedEvent != null) _InputPollingEndedEvent();
+                if(_onInputPollingEnded != null) _onInputPollingEnded.Invoke();
+            }
+        }
+
         #endregion
 
         #region Editor Recompile
@@ -2958,7 +3220,7 @@ namespace Rewired.UI.ControlMapper {
 #if UNITY_EDITOR
 
         private bool recompiling;
-        
+
         private void CheckEditorRecompile() {
             if(!recompiling) return;
             if(!ReInput.isReady) return;
@@ -2993,6 +3255,5 @@ namespace Rewired.UI.ControlMapper {
         }
 
         #endregion
-
     }
 }

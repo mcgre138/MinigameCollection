@@ -17,10 +17,14 @@ MonoBehaviour:
   elementIdentifiers:
   - _id: 0
     _name: Stick X
+    _positiveName: Stick Right
+    _negativeName: Stick Left
     _elementType: 0
     _compoundElementType: 0
   - _id: 1
     _name: Stick Y
+    _positiveName: Stick Up
+    _negativeName: Stick Down
     _elementType: 0
     _compoundElementType: 0
   - _id: 2
@@ -5122,5 +5126,215 @@ MonoBehaviour:
       joystickId2: 0
       splitAxis: 0
       sourceAxisPole: 0
+  - id: 30
+    name: VKB-Sim Gladiator MKII
+    joystickGuid: 59462056-360b-4027-b3f8-6e3b050766c9
+    fileGuid: df86f8a4434a18143ae01af07586426b
+    elementIdentifierMappings:
+    - templateId: 0
+      joystickId: 0
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 1
+      joystickId: 1
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 2
+      joystickId: 3
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 170
+      joystickId: 4
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 168
+      joystickId: 5
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 169
+      joystickId: 6
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 18
+      joystickId: 9
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 19
+      joystickId: 10
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 20
+      joystickId: 11
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 21
+      joystickId: 12
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 22
+      joystickId: 13
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 23
+      joystickId: 14
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 24
+      joystickId: 15
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 25
+      joystickId: 16
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 26
+      joystickId: 17
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 27
+      joystickId: 7
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 161
+      joystickId: 8
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 162
+      joystickId: 18
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 3
+      joystickId: 20
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 6
+      joystickId: 24
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 49
+      joystickId: 2
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+  - id: 31
+    name: Microsoft SideWinder Precision 2
+    joystickGuid: be29f7f1-266e-417a-bd70-37d12dccb739
+    fileGuid: b30ad908be1266e4eabb9e05de547164
+    elementIdentifierMappings:
+    - templateId: 0
+      joystickId: 0
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 1
+      joystickId: 1
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 2
+      joystickId: 2
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 49
+      joystickId: 3
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 3
+      joystickId: 4
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 6
+      joystickId: 5
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 7
+      joystickId: 6
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 8
+      joystickId: 7
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 18
+      joystickId: 10
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 19
+      joystickId: 9
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 20
+      joystickId: 8
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 28
+      joystickId: 12
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 29
+      joystickId: 13
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 30
+      joystickId: 14
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 31
+      joystickId: 15
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 32
+      joystickId: 16
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 33
+      joystickId: 17
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 34
+      joystickId: 18
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
+    - templateId: 35
+      joystickId: 19
+      joystickId2: 0
+      splitAxis: 0
+      sourceAxisPole: 0
   elementIdentifierIdCounter: 171
-  joystickIdCounter: 30
+  joystickIdCounter: 32

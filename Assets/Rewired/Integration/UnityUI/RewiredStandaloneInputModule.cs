@@ -132,6 +132,7 @@ namespace Rewired.Integration.UnityUI {
 
         private bool isMouseSupported {
             get {
+                if(!Input.mousePresent) return false;
                 if(!m_allowMouseInput) return false;
                 return isTouchSupported ? m_allowMouseInputIfTouchSupported : true;
             }

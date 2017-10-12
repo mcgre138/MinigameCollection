@@ -34,7 +34,6 @@ namespace Rewired.UI.ControlMapper {
         private CanvasGroup _canvasGroup;
         public UnityAction cancelCallback;
         private GameObject lastUISelection;
-        private List<Selectable> selectables;
 
         // Properties
 

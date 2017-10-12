@@ -1,3 +1,268 @@
+1.1.7.5:
+
+    Bug Fixes:
+      - Windows Standalone, Direct Input: Joysticks button held down when another joystick is disconnected now retain the pressed value.
+
+1.1.7.4:
+
+    Modified Controller Definitions:
+      - Sony DualShock 3, Windows, Raw Input & Direct Input: Fixed incorrect button and D-Pad mappings for Gasia Co.,Ltd PS3 Adapter.
+
+1.1.7.3:
+
+    Changes:
+      - Added silent install option for headless installation.
+      - Windows, Raw Input: Bluetooth devices without a valid serial number are no longer ignored.
+
+1.1.7.2:
+
+    Bug Fixes:
+      - Fixed bug causing GetAxisRaw to return an incorrect +1 value for one frame when a physical button is mapped to an axis-type action and the button is released.
+
+1.1.7.1:
+  
+    Bug Fixes:
+      - Windows Standalone: Eliminated 120 byte per frame memory allocation added in 1.1.7.0.
+
+1.1.7.0:
+
+  Changes:
+    - Modified Action system to determine button states from underlying contributing Controllers instead of calculating button states based on previous and current frame values. This changes some behavior of ButtonUp and ButtonDown events. ButtonDown events are no longer reported when a Controller is assigned to a Player while the button is already held down. ButtonUp events are no longer reported when un-assigning a Controller, or disabling a Controller or Controller Map while a button is held down. This was done to eliminated the need for frame skipping when assigning or un-assigning Controllers or enabling/disabling Controller Maps using a button on that same Controller.
+    - Rewired Editor: Added "Defer Controller Connect Events On Start" option to Settings.
+    - Rewired Editor: Added "Joystick Refresh Rate" option to Settings -> Windows.
+    - Rewired Editor: Added "Coordinate Mode" option to Custom Controller Axis properties.
+    - Rewired Editor: Changed "All" Platform Settings controls function more intuitively.
+    - Control Mapper: Added new events for when a popup window is opened or closed and when input polling starts and stops.
+    - Control Mapper: Added Unity events for each event and exposed them in the inspector.
+    - Controller Templates now support mapping the same template element to multiple controller elements.
+    - Added "Reverse Gear" to Racing Wheel template.
+    - Added "Reverse Gear" mappings to Racing Wheel template for Logitech G25, Logitech G27, Logitech G29, Logitech G920, and Thrustmaster TH8A Shifter.
+    - Added Rex Engine integration.
+    - Added Ultimate Survival integration.
+  
+  API Changes:
+    - Added AxisCoordinateMode enum.
+    - Added Player.GetAxisCoordinateMode method.
+    - Added Player.GetAxisRawCoordinateMode method.
+    - Added Player.GetAxisCoordinateModePrev method.
+    - Added Player.GetAxisRawCoordinateModePrev method.
+    - Added InputActionEventData.GetAxisCoordinateMode method.
+    - Added InputActionEventData.GetAxisRawCoordinateMode method.
+    - Added InputActionEventData.GetAxisCoordinateModePrev method.
+    - Added InputActionEventData.GetAxisRawCoordinateModePrev method.
+    - Added ReInput.ConfigHelper.deferControllerConnectedEventsOnStart property.
+    - Added ReInput.ConfigHelper.joystickRefreshRate property.
+    - Added ControlMapper.PopupWindowClosedEvent event.
+    - Added ControlMapper.PopupWindowOpenedEvent event.
+    - Added ControlMapper.onScreenClosed event.
+    - Added ControlMapper.onScreenOpened event.
+    - Added ControlMapper.onPopupWindowClosed event.
+    - Added ControlMapper.onPopupWindowOpened event.
+    - Added ControlMapper.InputPollingStarted event.
+    - Added ControlMapper.InputPollingEnded event.
+    - Added ControlMapper.onInputPollingStarted event.
+    - Added ControlMapper.onInputPollingEnded event.
+  
+  New Controller Definitions:
+    - Logitech Driving Force GT
+    - Thrustmaster Freestyler Bike
+  
+  Modified Controller Definitions:
+    - Changed CH FlightStick Pro "Dial" name to "Throttle."
+    - Reverted Saitek X45 "Stick Rotate" name to "Rudder."
+    - Sony DualShock 2: Added mapping for Super Dual Box Pro adapter with default HID driver, Linux Native and OSX Native mappings.
+    - Sony DualShock 3, Linux Native: Added mapping for Ubuntu 17.04 driver, fixed button mapping issues on Gasia Co.,Ltd PS3 Adapter mapping.
+
+  Bug Fixes:
+    - Windows Standalone, XInput: Joysticks disconnected and reconnected no longer report button values from before disconnection during the first frame after reconnection.
+    - Windows Standalone, Direct Input: Joysticks with hats no longer return a hat value of up for few frames when plugged in at runtime.
+    - Windows Standalone, Raw Input: Fixed memory leak when Headsoft VJoy is installed on the system.
+    - Windows Standalone: Added workaround for Steam issue preventing Control, Shift, and Alt keys from working when using Steam Streaming.
+    - Rewired Editor: Fixed issue preventing disabling Native Keyboard Handling in Settings -> Windows.
+    - OSX, Native: Fixed rare issue causing some Xbox controller vibration messages to not be sent to the device.
+    - PS4, Native: Fixed bug introduced in 1.1.6.0 causing gamepads to not be recognized.
+
+1.1.6.0:
+  
+  Changes:
+    - Changed Sony DualShock 4 controller display name and element identifier names on PS4 platform to conform to Sony's required standards.
+    - Added Positive Name and Negative Name fields to Controller Element Identifier in Hardware Joystick Map editor.
+    - Changed mouse axis positive/negative axis names to Mouse Left, Mouse Right, etc.
+    - Updated Control Mapper to use positive/negative name fields.
+    - Added FirstNonZeroValue Custom Calculation type.
+    - Added default UI controls to Corgi Engine integration.
+    - Corgi Engine integration: Added inventory system integration.
+    - Corgi Engine integration: Minimum required Unity version changed to Unity 5.6.3f1.
+    - Special platform inspector settings for Rewired_Core.dll are now checked more often that just when the build platform is changed to account for installing Rewired and/or special platform plugins with the build target already set to a special platform that is not supported by the base Unity editor.
+ 
+  New Controller Definitions:
+    - Logitech MOMO Racing Wheel
+ 
+  Modified Controller Definitions:
+    - Sony DualShock 3: Added WebGL mappings for OSX and Linux.
+    - Microsoft Xbox One: Added OSX Native mapping for Xbox One S controller firmware 3.1.1221.0.
+    - Added positive/negative axis names to most recognized controller axes.
+    - Changed CH CombatStick "Dial" name to "Throttle."
+    - Changed CH FighterStick "Dial" name to "Throttle."
+    - Changed Saitek Heavy Equipment panel "Stick Z (Blue)" name to "Stick Rotate (Blue)."
+    - Changed Saitek Heavy Equipment panel "Stick Z (Red)" name to "Stick Rotate (Red)."
+    - Changed Saitek X45 "Rudder" name to "Stick Rotate."
+    - Changed Saitek X-56 Rhino Throttle "MiniStick X", "MiniStick Y", and "MiniStick Button" to "Mini Stick X", "Mini Stick Y", and "Mini Stick Button."
+    - Changed Thrustmaster T.16000M "Slider" name to "Throttle."
+    
+  API Changes:
+    - Added ControllerElementIdentifier.positiveName property.
+    - Added ControllerElementIdentifier.negativeName property.
+    - Added ControllerPollingInfo.controller property.
+    - Added ControllerPollingInfo.player property.
+    - Added ControllerPollingInfo.elementIdentifier property.
+  
+  Bug Fixes:
+    - Disabling "Ignore Input When App Not In Focus" in the Rewired Input Manager works again in the Unity editor even when "Run Application in Background" is disabled in the Unity Player settings.
+    - Fixed missing class and method exceptions thrown during build time on Windows 8.0 Store and 8.1 Universal platforms.
+    - Windows Standalone, Raw Input: Fixed issue preventing Microsoft Xbox One controller from working when used with "Use XInput" disabled.
+
+1.1.5.3:
+  
+  Bug Fixes:
+    - Fixed internal timer issue affecting functions that rely on real time.
+  
+1.1.5.2:
+  
+  Bug Fixes:
+    - Fixed exception thrown by UserDataStore when calling ReInput.Reset or changing properties in ReInput.ConfigHelper that reset Rewired if a UserDataStore component is on the Rewired Input Manager.
+
+1.1.5.1:
+  
+  Bug Fixes:
+    - OSX Standalone, Native: Created workaround for Mono bug causing exception to be thrown when using Xbox controllers on some systems.
+
+1.1.5.0:
+
+  Changes:
+    - Added support for MFi gamepads on Windows Standalone, Windows 8.1 Store, and Windows UWP platforms.
+    - Added support for pressure-sensitive buttons on Windows Standalone, Windows 8.1 Store, and Windows UWP platforms.
+    - OSX Standalone, Native: Added support for Steam emulated controllers.
+    - Added Corgi Engine integration pack.
+    - Control Mapper: restoreDefaultsDelegate is now called at the end of the OnRestoreDefaultsConfirmed function.
+    
+  New Controller Definitions:
+    - Steam Controller (non-native)
+  
+  Modified Controller Definitions:
+    - SteelSeries Stratus XL (MFi): Added Raw Input and Windows UWP mappings.
+    - SteelSeries Nimbus (MFi): Added Raw Input and Windows UWP mappings.
+    - Horipad Ultimate HIP-047U (MFi):  Added Raw Input and Windows UWP mappings.
+    
+  Bug Fixes:
+    - Windows Standalone, Native Mouse Handling: UnityEngine.Input mouse input events now work in the editor again when Maximize On Play is enabled in Unity 5.6 and Unity 2017.
+    - OSX Standalone, Native: Created workaround for Mono bug causing exception to be thrown when using Xbox controllers on some systems.
+
+1.1.4.2:
+
+  Bug Fixes:
+    - Windows Standalone: Fixed potential freeze on start when using Direct Input or XInput introduced in 1.1.4.0.
+    - Fixed missing Trigger in HOTAS template for Microsoft Sidewinder Precision 2.
+
+1.1.4.1:
+
+  Changes:
+    - Reverted change adding UWP libraries into the project by defailt instead of as an optional install due to bug in Unity 2017 causing an exception on import when .NETCore 5.0 is not installed.
+
+  Bug Fixes:
+    - ReInput.PlayerHelper.GetPlayerId(string) now returns the correct Player Id.
+
+1.1.4.0:
+  
+  Changes:
+    - Updated for Unity 2017 compatibility.
+    - Added native support for WebGL platform. (Unity 5.0+)
+    - Windows Standalone, Raw Input, Direct Input: Added Native Keyboard Handling option.
+    - Windows Standalone with Native Keyboard Handling and Native Mouse Handling enabled: Disabling "Ignore Input When App Not In Focus" now allows mouse and keyboard input as well as joystick input when the application is not in focus in a build.
+    - Added Use XInput and Support HID Devices options to Windows UWP platform settings in Rewired Input Manager.
+    - Rewired Standalone Input Module: Changed to disable all mouse input if no physical mouse is present to match Unity's changes to the Standalone Input Module.
+    - UserDataStore_PlayerPrefs: Added options to save and load controller assignments.
+    - Player.GetTimedButtonPress, Player.GetTimedButtonPressUp, and negative button variants now accept a time value of 0.
+    - Input Behavior Button Short Press Time and Button Long Press Time can now be set to a value of 0.
+    - 8-way hats on unrecognized controllers now respect the "Force 4-way Hats" option at the Joystick level.
+    - iOS/tvOS: Joystick.name now reports the joystick name as reported by the device instead of "Controller" for MFi controllers.
+    - Added new SDL2 controller mappings
+  
+  New Controllers with Extended Support:
+    - GameSir G3
+    - GameSir G3s
+    - GameSir G3v
+    - GameSir G3w
+    - GameSir G4
+    - GameSir G4s
+    - 8Bitdo RB8-64 N64 Controller
+    - Microsoft SideWinder Precision 2
+    - TigerGame PS/PS2 Game Controller Adapter
+  
+  Modified Controller Definitions:
+    - Sony DualShock 4
+      - Linux Native: Added variant for changes made in the Ubuntu 17.04 driver.
+      - Linux Fallback: Dropped support for Linux Fallback due to the inability to differentiate driver 
+versions.
+    - Microsoft Xbox One, Linux Native, Linux Fallback: Added matching info for older firmware versions.
+    - Microsoft Xbox One, UWP Native: Added mappings when XInput is disabled.
+    - Microsoft Xbox 360, UWP Native: Added mappings when XInput is disabled.
+    - Logitech F310, UWP Native: Added mappings when XInput is disabled.
+    - Logitech F710, UWP Native: Added mappings when XInput is disabled.
+    - 8Bitdo NES30: Combined definitions for different connection modes into new definition file.
+    - 8Bitdo SNES30: Combined definitions for different connection modes into new definition file.
+    - 8Bitdo NES30 Pro: Combined definitions for different connection modes into new definition file.
+    - Sony DualShock 2: Combined definitions for different PS2 adapters into one definition file.
+    - Added native WebGL mappings for:
+      - Microsoft Xbox 360 Controller
+      - Microsoft Xbox One Controller
+      - Microsoft Xbox One S Controller
+      - Sony DualShock 4
+  
+  API Changes:
+    - Added ReInput.ConfigManager.nativeKeyboardSupport property.
+    - Added ReInput.ConfigManager.windowsUWPSupportHIDDevices property.
+    - Added UserDataStore_PlayerPrefs.LoadJoystickAssignments property.
+    - Added UserDataStore_PlayerPrefs.LoadMouseAssignments property.
+    - Added UserDataStore_PlayerPrefs.LoadKeyboardAssignments property.
+    - Added ReInput.ConfigHelper.webGLPrimaryInputSource property.
+  
+  Bug Fixes:
+    - Windows Raw Input, Direct Input, XInput: Eliminated 500 byte memory allocations generated periodically when polling for new devices.
+    - Unity 2017.1.b10, .NET 4.6 Experimental Scripting Backend: Fixed issue with method calls made by reflection.
+    - Windows 10 Universal, .NET scripting backend: Fixed possible freeze during device enumeration when HID device support enabled in app manifest.
+    - Windows 10 Universal, IL2CPP scripting backend: Fixed possible crash when closing app when HID device support enabled in app manifest.
+
+1.1.3.0:
+    
+  Changes:
+    - Added native support for Nintendo Switch platform. (Requires a separate download which can be obtained through the Nintendo Developer Portal.)
+    - Touch Joystick: Added Stick Bounds property to allow settings the stick movement bounds to a circle or square shape.
+    - Rewired Editor: Added option to export Action Category constants to separate classes.
+    - Rewired Editor: Added option to export constants in all caps.
+
+  API Changes:
+    - Added Joystick.deviceInstanceGuid property.
+    - Added Player.SetVibration method.
+    - Added Player.GetVibration method.
+    - Added Player.StopVibration method.
+    - Added ControlMapper.restoreDefaultsDelegate property.
+    - Added TouchJoystick.stickBounds property.
+    - Added TouchJoystick.StickBounds enum.
+    
+  New Controller Definitions:
+    - Mayflash N64 Controller Adapter for PC USB (2-port)
+    - VKB-Sim Gladiator MKII
+    
+  Modified Controller Definitions:
+    - Logitech G29: Updated all platforms for current firmware and driver version, added OSX and Windows fallback definitions.
+
+  Bug Fixes:
+    - Rewired Editor: Fixed bug preventing Custom Controller element properties from displaying.
+    - Hardware Joystick Map Editor: Fixed exception thrown when setting an axis to be the source of a button in Raw Input and Direct Input.
+    - Fixed compile error on Nintendo Switch platform.
+    - Control Mapper: Fixed bug preventing custom entries in Language Data from working.
+
 1.1.2.0:
 
   Changes:

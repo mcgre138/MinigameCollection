@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0af17bc3ce1152e40bbf3d5714f3f6c9
+timeCreated: 1507772012
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Chicken Salad
+  fontNames:
+  - Chicken Salad
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

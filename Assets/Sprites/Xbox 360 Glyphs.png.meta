@@ -1,0 +1,382 @@
+fileFormatVersion: 2
+guid: 0fa233a69dd636f4ba9613a1a5667324
+timeCreated: 1507772286
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Xbox 360 Glyphs_A
+    21300002: Xbox 360 Glyphs_1
+    21300004: Xbox 360 Glyphs_2
+    21300006: Xbox 360 Glyphs_3
+    21300008: Xbox 360 Glyphs_4
+    21300010: Xbox 360 Glyphs_B
+    21300012: Xbox 360 Glyphs_6
+    21300014: Xbox 360 Glyphs_7
+    21300016: Xbox 360 Glyphs_8
+    21300018: Xbox 360 Glyphs_9
+    21300020: Xbox 360 Glyphs_X
+    21300022: Xbox 360 Glyphs_11
+    21300024: Xbox 360 Glyphs_12
+    21300026: Xbox 360 Glyphs_13
+    21300028: Xbox 360 Glyphs_14
+    21300030: Xbox 360 Glyphs_Y
+    21300032: Xbox 360 Glyphs_16
+    21300034: Xbox 360 Glyphs_17
+    21300036: Xbox 360 Glyphs_18
+    21300038: Xbox 360 Glyphs_19
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_A
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1305
+        width: 328
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_1
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 1203
+        width: 453
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_2
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 1349
+        width: 473
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_3
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 1237
+        width: 413
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_4
+      rect:
+        serializedVersion: 2
+        x: 1887
+        y: 1236
+        width: 408
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_B
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 938
+        width: 328
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_6
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 742
+        width: 453
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_7
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 998
+        width: 476
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_8
+      rect:
+        serializedVersion: 2
+        x: 1443
+        y: 775
+        width: 413
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_9
+      rect:
+        serializedVersion: 2
+        x: 1887
+        y: 775
+        width: 408
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_X
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 564
+        width: 328
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_11
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 605
+        width: 235
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_12
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 636
+        width: 356
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_13
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 509
+        width: 294
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_14
+      rect:
+        serializedVersion: 2
+        x: 1736
+        y: 511
+        width: 290
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_Y
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 328
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_16
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 358
+        width: 449
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_17
+      rect:
+        serializedVersion: 2
+        x: 964
+        y: 265
+        width: 357
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_18
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 242
+        width: 234
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Xbox 360 Glyphs_19
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 0
+        width: 448
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

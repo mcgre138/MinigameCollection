@@ -42,7 +42,7 @@
 #define UNITY_5_9_PLUS
 #endif
 
-#if UNITY_4_6 || UNITY_5 || UNITY_6_PLUS
+#if UNITY_4_6 || UNITY_4_7 || UNITY_5_PLUS
 #define SUPPORTS_UNITY_UI
 #endif
 
@@ -62,6 +62,14 @@ namespace Rewired.Utils {
     /// <exclude></exclude>
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public class ExternalTools : IExternalTools {
+
+        public object GetPlatformInitializer() {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            return Rewired.Utils.Platforms.WebGL.Main.GetPlatformInitializer();
+#else
+            return null;
+#endif
+        }
 
         // Linux Tools
 #if UNITY_5_PLUS && UNITY_STANDALONE_LINUX
@@ -406,13 +414,5 @@ namespace Rewired.Utils {
 #endif
 
         #endregion
-
-        public object InitializePlatform(Rewired.Data.ConfigVars configVars) {
-#if UNITY_SWITCH && !UNITY_EDITOR
-            return Rewired.Platforms.NintendoSwitch.SwitchSettings.Initialize(configVars);
-#else
-            return null;
-#endif
-        }
     }
 }
