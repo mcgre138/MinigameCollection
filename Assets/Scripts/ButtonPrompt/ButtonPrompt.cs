@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using Rewired;
 
 public class ButtonPrompt : MonoBehaviour {
 
@@ -10,12 +12,48 @@ public class ButtonPrompt : MonoBehaviour {
 
     public Image icon;
 
+    public UnityEvent OnCorrect = new UnityEvent();
+    public UnityEvent OnIncorrect = new UnityEvent();
+
+    [Header("Input")]
+    [Range(1,4)] public int playerNumber = 1;
+    private int playerIndex = 0;
+    public string[] targetActions;
+
+    private string currentTarget;
+
+    void Awake()
+    {
+        playerIndex = playerNumber - 1;
+    }
+
     void OnEnable()
+    {
+        RandomizeButton();
+    }
+
+    void Update()
+    {
+        if (ReInput.players.Players[playerIndex].GetAnyButtonDown() && !ReInput.players.Players[playerIndex].GetButtonDown(currentTarget))
+        {
+            OnIncorrect.Invoke();
+            Debug.Log("Incorrect!");
+        }
+        else if (ReInput.players.Players[playerIndex].GetButtonDown(currentTarget))
+        {
+            OnCorrect.Invoke();
+            Debug.Log("Correct!");
+        }
+    }
+
+    public void RandomizeButton()
     {
         int rnd = Random.Range(0, buttons.Length);
 
         targetButton = buttons[rnd];
 
         icon.sprite = targetButton;
+
+        currentTarget = targetActions[rnd];
     }
 }

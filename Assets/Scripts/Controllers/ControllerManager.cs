@@ -5,6 +5,8 @@ using Rewired.ControllerExtensions;
 
 public class ControllerManager : MonoBehaviour {
 
+    public Color[] playerColors;
+
     void Start()
     {
         ReInput.ControllerConnectedEvent += ReInput_ControllerConnectedEvent;
@@ -39,7 +41,7 @@ public class ControllerManager : MonoBehaviour {
         {
             if (ReInput.controllers.IsControllerAssignedToPlayer(controller.type, controller.id, i))
             {
-                ds4.SetLightColor(Color.red);
+                ds4.SetLightColor(playerColors[i]);
                 return;
             }
         }
