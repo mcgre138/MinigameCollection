@@ -15,6 +15,8 @@ public class ButtonPrompt : MonoBehaviour {
     public UnityEvent OnCorrect = new UnityEvent();
     public UnityEvent OnIncorrect = new UnityEvent();
 
+    public bool isCorrect = false;
+
     [Header("Input")]
     [Range(1,4)] public int playerNumber = 1;
     private int playerIndex = 0;
@@ -37,12 +39,10 @@ public class ButtonPrompt : MonoBehaviour {
         if (ReInput.players.Players[playerIndex].GetAnyButtonDown() && !ReInput.players.Players[playerIndex].GetButtonDown(currentTarget))
         {
             OnIncorrect.Invoke();
-            Debug.Log("Incorrect!");
         }
         else if (ReInput.players.Players[playerIndex].GetButtonDown(currentTarget))
         {
             OnCorrect.Invoke();
-            Debug.Log("Correct!");
         }
     }
 
